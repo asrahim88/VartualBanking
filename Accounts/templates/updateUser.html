@@ -1,0 +1,132 @@
+<!-- update_banking_info.html -->
+{% extends "base.html" %}
+{% block title %}Update Personal Info{% endblock title %}
+
+{% block content %}
+<div class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md my-4">
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Update Personal Info</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="space-y-6">
+                <!-- Display Error Message for Phone Number -->
+                {% if form.phone_number.errors %}
+                    <div class="text-red-500 text-sm mb-4">
+                        {% for error in form.phone_number.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- User Fields -->
+                <div>
+                    <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.first_name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.last_name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_email" class="block text-sm font-medium text-gray-700">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- User Banking Info Fields -->
+                <div>
+                    <label for="id_phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    {{ form.phone_number }}
+                    {% if form.phone_number.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.phone_number.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
+                    {{ form.birth_date }}
+                    {% if form.birth_date.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.birth_date.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                    {{ form.gender }}
+                    {% if form.gender.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.gender.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_nid" class="block text-sm font-medium text-gray-700">NID</label>
+                    {{ form.nid }}
+                    {% if form.nid.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.nid.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Profile Image Section -->
+                <div>
+                    <label for="id_profile_image" class="block text-sm font-medium text-gray-700">Profile Pic</label>
+                    {% if form.instance.profile_image %}
+                    <div>
+                        <img src="{{ form.instance.profile_image.url }}" alt="Current Profile Image" class="w-24 h-24 rounded-full object-cover">
+                    </div>
+                    {% endif %}
+                    {{ form.profile_image }}
+                    {% if form.profile_image.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for error in form.profile_image.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="w-full bg-cyan-600 text-white py-2 rounded-lg hover:bg-cyan-700 transition duration-300">
+                    Update Info
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+    View Loan
+{% endblock title %}
+{% block extra_css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock extra_css %}
+{% block content %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl">
+            <h1 class="text-2xl font-bold mb-4 text-center text-gray-700">Loan Requests</h1>
+            
+            <!-- Display loan requests in a table -->
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead>
+                    <tr class="border-b">
+                        <th class="px-4 py-2 text-center">Loan ID</th>
+                        <th class="px-4 py-2 text-center">Account</th>
+                        <th class="px-4 py-2 text-center">Amount</th>
+                        <th class="px-4 py-2 text-center">Timestamp</th>
+                        <th class="px-4 py-2 text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in loan_requests %}
+                        <tr>
+                            <td class="px-4 py-2 text-center">{{ transaction.id}}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.account.account_number }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.amount }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.timestamp }}</td>
+                            <td class="px-4 py-2 text-center">
+                                {% if transaction.is_approved %}
+                                <form method="POST" action = "{% url "loan_payment" transaction.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="w-full bg-cyan-500 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-600 flex items-center justify-center">
+                                        <!-- FontAwesome Icon -->
+                                        <i class="fas fa-dollar-sign mr-2"></i>  <!-- This is the icon -->
+                                        Pay Loan
+                                    </button>
+                                </form>
+                                 
+                                {% else %}
+                                    Pending
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-4 py-2 text-center">No loan requests found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

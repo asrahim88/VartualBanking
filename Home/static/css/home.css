@@ -1,0 +1,5 @@
+ /* 3D Heading Effect */
+ .heading-3d {
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3), -3px -3px 5px rgba(255, 255, 255, 0.3);
+    transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
+  }

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="{% static "css/home.css" %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class = "bg-gra-100">
+    <div class=" px-4 sm:px-6 md:px-8 bg-white rounded-lg max-w-7xl mx-auto shadow-lg shadow-cyan-100 rounded-lg my-10">
+        <!-- 3D Styled Heading -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-cyan-600 mb-8 heading-3d transform transition duration-500 ease-in-out hover:scale-105 text-center">
+           
+            Welcome to Virtual Bank
+        </h1>
+        
+        <!-- Subheading with Icon -->
+        <div class="flex justify-center items-center space-x-3 mb-6">
+          <p class="text-gray-700 text-lg sm:text-xl leading-relaxed text-left">
+            Welcome to <span class="text-cyan-600 font-bold">Virtual Bank</span>, your ultimate destination for a modern, secure, and professional banking experience. 
+            At Virtual Bank, simplicity and innovation come together to provide a seamless financial journey for every user. Whether it's creating a unique bank account in seconds or managing your profile and transactions with ease, we ensure complete control over your finances.
+            
+            Discover the future of banking with a user-friendly interface and advanced tools tailored to exceed your expectations. At <span class="text-cyan-600 font-bold">Virtual Bank</span>, we don’t just provide services—we build trust and empower you to achieve financial success.
+          </p>
+          
+        </div>
+        <div class="flex items-center justify-center min-h-screen">
+        
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row bg-white  overflow-hidden">
+                <!-- Left Section: Features -->
+                <div class="w-full md:w-1/2 p-8">
+                  <h1 class="text-4xl font-extrabold text-cyan-600 mb-8">
+                    <i class="fas fa-cogs text-cyan-600 text-5xl"></i> Virtual Bank Features
+                  </h1>
+                  <ul class="space-y-6 text-gray-700 text-xl">
+                    <li>
+                      <i class="fas fa-user-plus text-cyan-500 text-left"></i>
+                      <strong>Easy Registration:</strong> Sign up with a unique username, valid email, phone number, and NID. A unique bank account is automatically generated.
+                    </li>
+                    <li>
+                      <i class="fas fa-user-circle text-cyan-500"></i>
+                      <strong>Profile Management:</strong> Update profile details like address and password. Username and bank account number remain unchanged.
+                    </li>
+                    <li>
+                      <i class="fas fa-lock text-cyan-500"></i>
+                      <strong>Password Reset:</strong> Reset forgotten passwords through email verification.
+                    </li>
+                    <li>
+                      <i class="fas fa-piggy-bank text-cyan-500"></i>
+                      <strong>Banking Features:</strong> Deposit money, withdraw funds, request loans, view transaction history, and check unpaid loans.
+                    </li>
+                    <li>
+                      <i class="fas fa-shield-alt text-cyan-500"></i>
+                      <strong>Secure Access:</strong> Unauthorized users cannot access banking features.
+                    </li>
+                  </ul>
+                </div>
+                <!-- Right Section: Image -->
+                <div class="w-full md:w-1/2 flex items-center justify-center bg-cyan-50 shadow rounded-[40px]  duration-300 cursor-pointer p-[3px] border-2 border-cyan-100">
+                    <img src="{% static 'images/pic.jpg' %}" alt="Virtual Bank Office" class="object-contain p-[5px] rounded-[40px] border-2 border-cyan-100 border ">
+                  </div>
+              </div>
+        </div>
+      </div>
+</div>
+  
+
+    
+{% endblock content %}

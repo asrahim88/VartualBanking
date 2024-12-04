@@ -1,0 +1,38 @@
+<!-- update_banking_info.html -->
+{% extends "base.html" %}
+{% block title %}Update Address Info{% endblock title %}
+
+{% block content %}
+<div class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md my-4">
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Update Address Info</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="space-y-6">
+                <!-- User Fields -->
+                <div>
+                    <label for="id_street_address" class="block text-sm font-medium text-gray-700">Street Address: </label>
+                    {{ form.street_address }}
+                </div>
+                <div>
+                    <label for="id_city" class="block text-sm font-medium text-gray-700">City: </label>
+                    {{ form.city }}
+                </div>
+                <div>
+                    <label for="id_postal_code" class="block text-sm font-medium text-gray-700">Postal Code: </label>
+                    {{ form.postal_code}}
+                </div>
+                <div>
+                    <label for="id_country" class="block text-sm font-medium text-gray-700">Country: </label>
+                    {{ form.country}}
+                </div>
+
+                <button type="submit" class="w-full bg-cyan-600 text-white py-2 rounded-lg hover:bg-cyan-700 transition duration-300 ">
+                    Update address
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+

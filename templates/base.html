@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    {% load static %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% block extra_css %}
+
+    {% endblock extra_css %}
+</head>
+<body>
+    <head>
+        {% block nav_block %}
+            <!-- Navbar -->
+<nav class="bg-cyan-500 shadow-lg shadow-cyan-50 p-4">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between">
+        
+        <!-- Logo Section (left side) -->
+        <div class="flex items-center space-x-4">
+            <a href ="{% url "home" %}" class ="flex items-center cursor-pointer mr-12">
+                <div class = "w-[70px] h-[60px]">
+                    <img src="{% static "images/lgo.png" %}" alt="" class = "w-[100%] h-[100%]">
+                </div>
+                <p>
+                    <small class = "text-3xl text-gray-200  font-bold">VirtualBank</small>
+                </p>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                {% if request.user.is_authenticated %}
+                <a href="{% url "deposit" %}" class="text-white hover:underline">Deposit</a>
+                <a href="{% url "withdraw" %}" class="text-white hover:underline">Withdraw</a>
+                <a href="{% url "loan_request" %}" class="text-white hover:underline">Loan Request</a>
+                <a href="{% url "all_transaction_report" %}" class="text-white hover:underline">Transaction Reports</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right Side (Login/Register and Icons) -->
+        <div class="hidden md:flex items-center space-x-4">
+            {% if request.user.is_authenticated %}
+                <a href="{% url "profile" %}" class="flex items-center space-x-2 bg-cyan-800 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 focus:outline-none">
+                    <i class="fas fa-user"></i> <!-- Font Awesome Profile Icon -->
+                    <span>Profile</span>
+                </a>
+
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button 
+                        type="submit" 
+                        class="flex items-center bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-300"
+                    >
+                        <i class="fas fa-sign-out-alt mr-2"></i> <!-- Font Awesome Icon for logout -->
+                        Logout
+                    </button>
+                </form>
+                </a>
+            {% else %}
+                <a href="{% url "login" %}" class="text-white flex items-center border border-2 border-white p-2 rounded-lg hover:bg-cyan-700 hover:text-white w-[100px] text-center block">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Login
+                </a>
+                <a href="{% url "register" %}" class="text-white flex items-center border border-2 border-white p-2 rounded-lg hover:bg-cyan-700 hover:text-white">
+                    <i class="fas fa-user-plus mr-2 "></i> Register
+                </a>
+            {% endif %}
+            
+        </div>
+
+        <!-- Mobile Menu Button (Hamburger Menu) -->
+        <div class="md:hidden">
+            <button id="menu-btn" class="text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="md:hidden hidden  p-4">
+        <hr class = "text-white mb-4">
+        {% if request.user.is_authenticated %}
+        <a href="/deposit" class="block text-white py-2 hover:border-b hover:border-r-[0px] hover:border-l-[0px] p-2 border-r border-l border-b border-white rounded-lg mb-2">Deposit</a>
+        <a href="/withdraw" class="block text-white py-2 hover:border-b hover:border-r-[0px] hover:border-l-[0px] p-2 border-r border-l border-b border-white rounded-lg mb-2">Withdraw</a>
+        <a href="/loan-request" class="block text-white py-2 hover:border-b hover:border-r-[0px] hover:border-l-[0px] p-2 border-r border-l border-b border-white rounded-lg mb-2">Loan Request</a>
+        <a href="/transaction-reports" class="block text-white py-2 hover:border-b hover:border-r-[0px] hover:border-l-[0px] p-2 border-r border-l border-b border-white rounded-lg mb-2">Transaction Reports</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            <a href="{% url "profile" %}" class="flex items-center space-x-2 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-400 focus:outline-none mb-2 w-[120px] border-2 border-white">
+                <i class="fas fa-user"></i> <!-- Font Awesome Profile Icon -->
+                <span>Profile</span>
+            </a>
+
+            <a href = "{% url "logout" %}" class="flex items-center space-x-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none w-[120px] border-2 border-white">
+                <i class="fas fa-sign-out-alt"></i> <!-- Font Awesome Logout Icon -->
+                <span>Logout</span>
+            </a>
+        {% else %}
+            <a href="{% url "login" %}" class="block text-white py-2 border border-2 border-white mb-2 text-center rounded-lg hover:border-cyan-500 hover:bg-gray-100 hover:text-cyan-500">
+                <i class="fas fa-sign-in-alt"></i>
+                Login</a>
+            <a href="{% url "register" %}" class="block text-white py-2 border border-2 border-white text-center rounded-lg hover:border-cyan-500 hover:bg-gray-100 hover:text-cyan-500">
+                <i class="fas fa-user-plus mr-2 "></i>
+                Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+        {% endblock nav_block %}
+    </head>
+    <main>
+        {% block content %}
+        
+        {% endblock content %}
+    </main>
+    <footer class="bg-gray-300 text-cyan-900 py-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-sm">&copy; 2024 VirtualBank. All Rights Reserved.</p>
+                <nav class="mt-4">
+                    <a href="#about" class="text-white hover:underline mx-2">About Us</a>
+                    <a href="#services" class="text-white hover:underline mx-2">Services</a>
+                    <a href="#privacy" class="text-white hover:underline mx-2">Privacy Policy</a>
+                    <a href="#contact" class="text-white hover:underline mx-2">Contact</a>
+                </nav>
+            </div>
+    </footer>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+    
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    {% block extra_js %}
+    {% endblock extra_js %}
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+    All Transactions Reports
+{% endblock title %}
+
+{% block content %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-6xl">
+
+            <h1 class="text-2xl font-bold mb-4 text-center text-gray-700">All Transactions Reports</h1>
+
+            <!-- Date Range Filter Form -->
+            <form method="GET" class="mb-4 flex flex-wrap space-x-4">
+                <div class="flex-1">
+                    <input 
+                        type="date" 
+                        name="start_date" 
+                        class="border border-gray-300 rounded-lg px-4 py-2 w-full text-center"
+                        placeholder="Start Date"
+                    >
+                </div>
+                <div class="flex-1">
+                    <input 
+                        type="date" 
+                        name="end_date" 
+                        class="border border-gray-300 rounded-lg px-4 py-2 w-full text-center"
+                        placeholder="End Date"
+                    >
+                </div>
+                <div>
+                    <button 
+                        type="submit" 
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full sm:w-auto"
+                    >
+                        Filter
+                    </button>
+                </div>
+            </form>
+
+            <!-- Display Transactions -->
+            {% if transactions %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-center">Account Number</th>
+                            <th class="px-4 py-2 text-center">Transaction Type</th>
+                            <th class="px-4 py-2 text-center">Amount</th>
+                            <th class="px-4 py-2 text-center">Updated Balance</th>
+                            <th class="px-4 py-2 text-center">Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr class="border-b">
+                            <td class="px-4 py-2 text-center">{{ transaction.account_number }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.transaction_type }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.amount }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.updated_balance }}</td>
+                            <td class="px-4 py-2 text-center">{{ transaction.timestamp }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-4">No transactions found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-center text-gray-700">No transactions found for the selected date range.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Register Page
+{% endblock title %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gray-100 py-8">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Create an Account</h2>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Left Column -->
+                <div class="space-y-4">
+                    {% for field in form.visible_fields|slice:":8" %}
+                        <div class="relative">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                <p class="text-red-500 text-sm">{{ field.errors|join:" " }}</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-4">
+                    {% for field in form.visible_fields|slice:"8:" %}
+                        <div class="relative">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            
+                            {% if field.name == "password1" %}
+                                <!-- Eye Icon for Password 1 -->
+                                <span id="togglePassword1" class="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer">
+                                    <i class="fas fa-eye text-gray-600 pt-8"></i>
+                                </span>
+                            {% endif %}
+
+                            {% if field.name == "password2" %}
+                                <!-- Eye Icon for Password 2 -->
+                                <span id="togglePassword2" class="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer">
+                                    <i class="fas fa-eye text-gray-600 pt-8"></i>
+                                </span>
+                            {% endif %}
+
+                            {% if field.errors %}
+                                <p class="text-red-500 text-sm">{{ field.errors|join:" " }}</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-cyan-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-cyan-700 transition duration-300">
+                    Create Account
+                </button>
+            </div>
+        </form>
+        <p class="text-center mt-1">Do you have an account? <small><a href="{% url 'login' %}" class="text-cyan-700 hover:underline">Please Login</a></small></p>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static "js/register.js" %}"></script>
+{% endblock extra_js %}
