@@ -14,7 +14,6 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')  # Keep fallback for
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '').split(',')]
 
-print(ALLOWED_HOSTS)  # এটি দেখাবে আপনার ALLOWED_HOSTS কিভাবে লোড হচ্ছে
 
 
 # Installed apps
