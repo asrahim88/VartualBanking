@@ -77,7 +77,7 @@
 ![Registration Page](https://github.com/asrahim88/VirtualBanking/blob/main/screenShots/registrationPage.png)
 
 ### Profile Page
-![Registration Page](https://github.com/asrahim88/VirtualBanking/blob/main/screenShots/profilePage.png)
+
 
 ### Deposit Page
 ![Deposit Page](https://github.com/asrahim88/VirtualBanking/blob/main/screenShots/depositMoneyPage.png)
